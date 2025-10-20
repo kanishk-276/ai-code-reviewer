@@ -1,0 +1,228 @@
+@import 'tailwindcss';
+
+:root {
+  --color-background-primary: #111827; /* bg-gray-900 */
+  --color-background-secondary: #1f2937; /* bg-gray-800 */
+  --color-text-primary: #f3f4f6; /* text-gray-100 */
+  --color-indigo-primary: #4f46e5; /* bg-indigo-600 */
+  --color-indigo-hover: #6366f1; /* hover:bg-indigo-500 */
+  --color-border: #374151; /* border-gray-700 */
+  --color-error: #991b1b; /* bg-red-800 */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+#root {
+  /* Initial padding (p-4) */
+  padding: 1rem; 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Medium screens and up (Equivalent to md:p-8) */
+@media (min-width: 768px) {
+  #root {
+    padding: 2rem;
+  }
+}
+
+/* -------------------------------------------------------------------
+| Header
+---------------------------------------------------------------------- */
+.app-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.app-header h1 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 800; /* font-extrabold */
+  color: #818cf8; /* text-indigo-400 */
+  letter-spacing: -0.025em; /* tracking-tight */
+  margin: 0;
+}
+
+.app-header p {
+  font-size: 0.875rem; /* text-sm */
+  color: #9ca3af; /* text-gray-400 */
+  margin-top: 0.25rem;
+}
+
+/* -------------------------------------------------------------------
+| Main Layout (Equivalent to flex-1 flex-col md:flex-row gap-6)
+---------------------------------------------------------------------- */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Medium screens and up (Equivalent to md:flex-row) */
+@media (min-width: 768px) {
+  .app-main {
+    flex-direction: row;
+  }
+}
+
+/* -------------------------------------------------------------------
+| Panel Styles (Left and Right)
+---------------------------------------------------------------------- */
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 40vh;
+}
+
+/* Medium screens and up (Equivalent to md:flex-1 and md:min-h-full) */
+@media (min-width: 768px) {
+  .panel {
+    flex: 1;
+    min-height: 100%;
+  }
+}
+
+.panel h2 {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 0.75rem;
+  color: #e5e7eb; /* text-gray-200 */
+}
+
+.panel-content {
+  flex: 1;
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.2); /* shadow-2xl */
+  background-color: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------------
+| Textarea/Editor Style
+---------------------------------------------------------------------- */
+.code-input-area {
+  width: 100%;
+  height: 100%;
+  display: block;
+  font-family: 'Fira Code', 'Fira Mono', monospace;
+  font-size: 0.875rem; /* 14px */
+  min-height: 100%;
+  padding: 1rem;
+  line-height: 1.5;
+  tab-size: 4;
+  resize: none;
+  background-color: #1f2937;
+  color: var(--color-text-primary);
+  border: none;
+  outline: none;
+}
+
+/* -------------------------------------------------------------------
+| Review Button
+---------------------------------------------------------------------- */
+.review-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px; /* rounded-full */
+  font-weight: 700; /* font-bold */
+  font-size: 0.875rem; /* text-sm */
+  letter-spacing: 0.05em; /* tracking-wider */
+  transition: all 300ms ease-in-out;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  cursor: pointer;
+  border: none;
+}
+
+.review-button:hover:not(:disabled) {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* hover:shadow-xl */
+  transform: translateY(-2px);
+}
+
+.review-button:not(:disabled) {
+  background-color: var(--color-indigo-primary);
+  color: white;
+}
+
+.review-button:disabled {
+  background-color: #4b5563; /* bg-gray-600 */
+  color: #d1d5db; /* text-gray-300 */
+  cursor: not-allowed;
+}
+
+.review-button.is-loading .icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* -------------------------------------------------------------------
+| Review Output Panel (Markdown)
+---------------------------------------------------------------------- */
+.review-output {
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* Styling Markdown content (mimicking prose-invert) */
+.review-output * {
+  color: inherit;
+}
+
+.review-output h2, .review-output h3, .review-output h4 {
+  color: #e5e7eb; /* Light headings */
+  border-bottom: 1px solid #374151; /* subtle border */
+  padding-bottom: 0.3em;
+  margin-top: 1.5rem;
+}
+
+.review-output p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+
+.review-output pre {
+  background-color: #111827; /* dark code block background */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.review-output code {
+  font-family: 'Fira Code', 'Fira Mono', monospace;
+  font-size: 0.875em;
+  color: #93c5fd; /* light blue for inline code */
+}
+
+/* Error Message Box */
+.error-box {
+  padding: 1rem;
+  background-color: var(--color-error);
+  color: #fee2e2; /* red-100 */
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+.error-box p {
+    margin: 0;
+}
+.error-box .font-bold {
+    font-weight: 700;
+}
