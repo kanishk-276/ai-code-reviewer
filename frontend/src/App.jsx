@@ -41,11 +41,11 @@ The review will appear here.
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post('http://localhost:3000/ai/get-review', { code });
+      const response = await axios.post('https://ai-code-reviewer-60yh.onrender.com/ai/get-review', { code });
       setReview(response.data);
     } catch (err) {
       console.error('API Error:', err);
-      setError('Failed to fetch review. Please check the server connection (http://localhost:3000).');
+      setError('Failed to fetch review. Please check the server connection (https://ai-code-reviewer-60yh.onrender.com).');
       setReview('## Error\n\nFailed to fetch review. Check your network connection and server status.');
     } finally {
       setIsLoading(false);
